@@ -14,6 +14,9 @@ class Question(models.Model):
     def was_published_recently(self):
         now = timezone.now()
         return now - datetime.timedelta(days=1) <= self.pub_date <= now
+    was_published_recently.admin_order_field = 'pub_date'  # admin画面でソート時に参照するフィールド？
+    was_published_recently.boolean = True  
+    was_published_recently.short_description = 'Published recently?'  # admin画面でフィールド名として表示する文字列
 
 
 class Choice(models.Model):
